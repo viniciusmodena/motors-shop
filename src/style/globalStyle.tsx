@@ -6,6 +6,7 @@ export const theme = extendTheme({
       body: {
         bg: "greyScale.grey8",
         color: "greyScale.grey1",
+        width: "100vw",
       },
       a: {
         textDecoration: "none",
@@ -13,6 +14,9 @@ export const theme = extendTheme({
       li: {
         textDecoration: "none",
         listStyle: "none",
+      },
+      header: {
+        width: "100%",
       },
     },
   },
@@ -170,6 +174,37 @@ export const theme = extendTheme({
           fontSize: "sm",
           py: "12px",
           px: "28px",
+        },
+      },
+    },
+    Link: {
+      baseStyle: {
+        color: "greyScale.grey2",
+      },
+      sizes: {
+        sm: {
+          fontSize: "16px",
+        },
+        md: {
+          fontSize: "24px",
+        },
+      },
+      variants: {
+        logo: {
+          fontSize: "24px",
+          fontWeight: "900",
+          backgroundImage:
+            "linear-gradient(90deg, #0B0D0D -1.61%, #4529E6 100.99%)",
+          backgroundRepeat: "repeat",
+          backgroudSize: "100%",
+          "-webkit-background-clip": "text",
+          "-webkit-text-fill-color": "transparent",
+        },
+        authenticated: {
+          fontWeight: "400",
+        },
+        notAuthenticated: {
+          fontWeight: "600",
         },
       },
     },
