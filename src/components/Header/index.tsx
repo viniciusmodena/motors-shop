@@ -55,10 +55,11 @@ export const Header = () => {
           borderBottom="2px solid"
           borderColor={"greyScale.grey6"}
         >
+          {/* Logo */}
           <Link variant="logo">
             Motors <span style={{ fontSize: "16px" }}>shop</span>
           </Link>
-
+          {/* NavBar widescreen */}
           <Hide breakpoint="(max-width: 900px)">
             <Flex gap="44px" h="100%" alignItems="center">
               {/* NavLinks */}
@@ -165,9 +166,17 @@ export const Header = () => {
                 </Menu>
               ) : (
                 <Flex gap="44px" alignItems="center">
-                  <Link size="sm" variant={"notAuthenticated"} onClick={login}>
+                  <Button
+                    size={"lg"}
+                    bg={"transparent"}
+                    color="greyScale.grey2"
+                    justifyContent={"flex-start"}
+                    p={"0"}
+                    my={"8px"}
+                    onClick={login}
+                  >
                     Fazer Login
-                  </Link>
+                  </Button>
                   <Button
                     size="lg"
                     bg="greyScale.whiteFixed"
@@ -181,15 +190,16 @@ export const Header = () => {
               )}
             </Flex>
           </Hide>
+          {/* Menu Mobile */}
           <Show breakpoint="(max-width: 900px)">
             <Menu matchWidth={false} gutter={20}>
               {({ isOpen }) => (
                 <>
                   <MenuButton as={IconButton} bg="transparent">
                     {isOpen ? (
-                      <CloseIcon w={"16px"} h={"21px"} fontWeight={"900"} />
+                      <CloseIcon w={"12px"} h={"18px"} fontWeight={"900"} />
                     ) : (
-                      <HamburgerIcon w={"12px"} h={"18px"} fontWeight={"900"} />
+                      <HamburgerIcon w={"16px"} h={"21px"} fontWeight={"900"} />
                     )}
                   </MenuButton>
                   <MenuList
@@ -225,14 +235,6 @@ export const Header = () => {
                       Leilão
                     </MenuItem>
                     <MenuDivider />
-
-                    {/* <Flex
-                      direction={"column"}
-                      justifyContent={"center"}
-                      alignItems={"stretch"}
-                      gap={"44px"}
-                      padding={"32px 12px"}
-                    > */}
                     {authenticated ? (
                       <Flex
                         direction={"column"}
@@ -291,13 +293,24 @@ export const Header = () => {
                         gap={"44px"}
                         padding={"32px 12px"}
                       >
-                        <Link
+                        {/* <Link
                           size="sm"
                           variant={"notAuthenticated"}
                           onClick={login}
                         >
                           Fazer Login
-                        </Link>
+                        </Link> */}
+                        <Button
+                          size={"lg"}
+                          bg={"transparent"}
+                          color="greyScale.grey2"
+                          justifyContent={"flex-start"}
+                          p={"0"}
+                          my={"8px"}
+                          onClick={login}
+                        >
+                          Fazer Login
+                        </Button>
                         <Button
                           size="lg"
                           bg="greyScale.whiteFixed"
@@ -309,23 +322,6 @@ export const Header = () => {
                         </Button>
                       </Flex>
                     )}
-                    {/* <Link
-                        size="sm"
-                        variant={"notAuthenticated"}
-                        onClick={login}
-                      >
-                        Fazer Login
-                      </Link>
-                      <Button
-                        size="lg"
-                        bg="greyScale.whiteFixed"
-                        border="1.5px solid"
-                        borderColor={"greyScale.grey4"}
-                        color={"greyScale.grey0"}
-                      >
-                        Cadastrar
-                    </Button>*/}
-                    {/* </Flex> */}
                   </MenuList>
                 </>
               )}
@@ -334,5 +330,21 @@ export const Header = () => {
         </Flex>
       </nav>
     </header>
+  );
+};
+
+const ProductCard = () => {
+  return (
+    <>
+      <Flex>Card</Flex>
+    </>
+  );
+};
+
+const ProductCardAuction = () => {
+  return (
+    <>
+      <Flex>Card action</Flex>
+    </>
   );
 };
