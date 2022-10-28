@@ -12,7 +12,7 @@ export const ProductCard = ({ product }: any) => {
       flexDirection="column"
       justifyContent="space-between"
       h="350px"
-      w="312px"
+      minW="312px"
     >
       <Flex
         justifyContent="center"
@@ -53,7 +53,7 @@ export const ProductCard = ({ product }: any) => {
         <Image
           src={product.img_url}
           alt={product.title}
-          objectFit="cover"
+          objectFit="contain"
           w="262px"
           h="150px"
           border="none"
