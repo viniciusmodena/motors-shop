@@ -4,13 +4,14 @@ import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "./style/globalStyle";
 import { AdvertiseListProvider } from "./Providers/AdvertiseList.provider";
+import Providers from "./Providers";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <AdvertiseListProvider>
-      <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
+      <Providers>
         <App />
-      </ChakraProvider>
-    </AdvertiseListProvider>
+      </Providers>
+    </ChakraProvider>
   </React.StrictMode>
 );

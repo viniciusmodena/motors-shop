@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState({
     first_name: "Vinicius",
