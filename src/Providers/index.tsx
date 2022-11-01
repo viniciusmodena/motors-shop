@@ -1,6 +1,6 @@
 import React from "react";
-import { AdvertiseProvider } from "./advertise";
 import { UserProvider } from "./users";
+import { AdvertiseProvider } from "./advertises";
 
 const Providers = ({ children }: any) => {
   return (

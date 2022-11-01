@@ -103,13 +103,9 @@ export const Header = (): JSX.Element => {
                     onMouseEnter={onOpen}
                     onMouseLeave={onClose}
                     h="100%"
+                    minWidth={"170px"}
                   >
-                    <Flex
-                      direction="row"
-                      alignItems="center"
-                      gap="8px"
-                      minWidth={"170px"}
-                    >
+                    <Flex direction="row" alignItems="center" gap="8px">
                       <Avatar
                         h="32px"
                         w="32px"

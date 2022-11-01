@@ -56,7 +56,7 @@ interface AdvertiseType {
 }
 
 interface RegisterAdvertiseType {
-  vehicle: UpdateVehicleType;
+  vehicle: RegisterVehicleType;
   is_active: boolean;
   is_auction: boolean;
 }
@@ -107,7 +107,7 @@ export const AdvertiseProvider = ({ children }: AdvertiseProviderProps) => {
   const registerAdvertise = (data: RegisterAdvertiseType) => {
     api
       .post("", data)
-      .then((res) => {
+      .then((res: AxiosResponse) => {
         console.log(res);
       })
       .catch((err) => {
@@ -117,23 +117,23 @@ export const AdvertiseProvider = ({ children }: AdvertiseProviderProps) => {
 
   const listUsersAdvertises = () => {
     api
-      .post(`/?is_auction=false`)
-      .then((res) => {
+      .get("")
+      .then((res: AxiosResponse) => {
         console.log(res);
 
-        const cars: AdvertiseType[] = [];
-        const bikes: AdvertiseType[] = [];
+        // const cars: AdvertiseType[] = [];
+        // const bikes: AdvertiseType[] = [];
 
-        res.data.filter((ad: AdvertiseType) => {
-          if (ad.vehicle.type.toLowerCase() === "car") {
-            cars.push(ad);
-          } else if (ad.vehicle.type.toLowerCase() === "bikes") {
-            bikes.push(ad);
-          }
-        });
+        // res.data.filter((ad: AdvertiseType) => {
+        //   if (ad.vehicle.type.toLowerCase() === "car") {
+        //     cars.push(ad);
+        //   } else if (ad.vehicle.type.toLowerCase() === "bikes") {
+        //     bikes.push(ad);
+        //   }
+        // });
 
-        setUsersCars(cars);
-        setUsersBikes(bikes);
+        // setUsersCars(cars);
+        // setUsersBikes(bikes);
       })
       .catch((err) => {
         console.log(err);
@@ -142,23 +142,23 @@ export const AdvertiseProvider = ({ children }: AdvertiseProviderProps) => {
 
   const listAdvertises = () => {
     api
-      .get("/?is_auction=false")
-      .then((res) => {
+      .get("")
+      .then((res: AxiosResponse) => {
         console.log(res);
 
-        const cars: AdvertiseType[] = [];
-        const bikes: AdvertiseType[] = [];
+        // const cars: AdvertiseType[] = [];
+        // const bikes: AdvertiseType[] = [];
 
-        res.data.filter((ad: AdvertiseType) => {
-          if (ad.vehicle.type.toLowerCase() === "car") {
-            cars.push(ad);
-          } else if (ad.vehicle.type.toLowerCase() === "bikes") {
-            bikes.push(ad);
-          }
-        });
+        // res.data.filter((ad: AdvertiseType) => {
+        //   if (ad.vehicle.type.toLowerCase() === "car") {
+        //     cars.push(ad);
+        //   } else if (ad.vehicle.type.toLowerCase() === "bikes") {
+        //     bikes.push(ad);
+        //   }
+        // });
 
-        setUsersCars(cars);
-        setUsersBikes(bikes);
+        // setUsersCars(cars);
+        // setUsersBikes(bikes);
       })
       .catch((err) => {
         console.log(err);
@@ -167,8 +167,8 @@ export const AdvertiseProvider = ({ children }: AdvertiseProviderProps) => {
 
   const retriveAdvertise = () => {
     api
-      .get(``)
-      .then((res) => {
+      .get("")
+      .then((res: AxiosResponse) => {
         console.log(res);
       })
       .catch((err) => {
@@ -178,8 +178,8 @@ export const AdvertiseProvider = ({ children }: AdvertiseProviderProps) => {
 
   const updateAdvertise = (data: UpdateAdvertiseType) => {
     api
-      .patch(``, data)
-      .then((res) => {
+      .patch("", data)
+      .then((res: AxiosResponse) => {
         console.log(res);
       })
       .catch((err) => {
@@ -189,8 +189,8 @@ export const AdvertiseProvider = ({ children }: AdvertiseProviderProps) => {
 
   const deleteAdvertise = () => {
     api
-      .delete(``)
-      .then((res) => {
+      .delete("")
+      .then((res: AxiosResponse) => {
         console.log(res);
       })
       .catch((err) => {

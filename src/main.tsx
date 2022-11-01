@@ -8,10 +8,10 @@ import Providers from "./Providers";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <Providers>
+    <Providers>
+      <ChakraProvider theme={theme}>
         <App />
-      </Providers>
-    </ChakraProvider>
+      </ChakraProvider>
+    </Providers>
   </React.StrictMode>
 );
