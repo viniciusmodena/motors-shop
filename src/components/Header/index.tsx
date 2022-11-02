@@ -56,7 +56,7 @@ export const Header = () => {
           borderColor={"greyScale.grey6"}
         >
           {/* Logo */}
-          <Link variant="logo">
+          <Link variant="logo" href="/">
             Motors <span style={{ fontSize: "16px" }}>shop</span>
           </Link>
           {/* NavBar widescreen */}
