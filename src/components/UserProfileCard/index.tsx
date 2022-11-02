@@ -2,14 +2,14 @@ import { Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUser, users } from "../../data";
 
-export const UserProfileCard = ({user}: any) => {
+export const UserProfileCard = ({ user }: any) => {
   // const params = useParams()
   // const user = users.find((user)=> user.id === parseInt(params.user_id, 10))
   // const navigate = useNavigate()
   // if (!user) {
   //   navigate("/")
   // }
-  
+
   return (
     <Flex
       padding={["4rem 1rem", "4rem 4rem", "4rem 6rem"]}
