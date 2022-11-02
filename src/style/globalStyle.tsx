@@ -16,6 +16,7 @@ export const theme = extendTheme({
         color: "greyScale.grey1",
         width: "100vw",
         overflowX: "hidden",
+
       },
       a: {
         textDecoration: "none",

@@ -63,6 +63,7 @@ export const Header = (): JSX.Element => {
         >
           {/* Logo */}
           <Link variant="logo" onClick={() => navigate("/")}>
+
             Motors <span style={{ fontSize: "16px" }}>shop</span>
           </Link>
           {/* NavBar widescreen */}

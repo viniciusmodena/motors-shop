@@ -13,6 +13,7 @@ export const ProductCard = ({ product }: any) => {
       justifyContent="space-between"
       h="350px"
       minW="312px"
+      maxW="312px"
     >
       <Flex
         justifyContent="center"
