@@ -1,11 +1,14 @@
 import { Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ProductCard = ({ product }: any) => {
   const randomNumber = Math.floor(Math.random() * 12) + 1;
   const [randomColor, setRandomColor] = useState(
     "randomColorsProfile.random" + randomNumber.toString()
   );
+
+  const navigate = useNavigate();
 
   return (
     <Flex
@@ -21,6 +24,7 @@ export const ProductCard = ({ product }: any) => {
         bgColor="greyScale.grey7"
         border="2px solid #E9ECEF"
         position="relative"
+        onClick={() => navigate("/advertise")}
         _hover={{
           border: "2px solid #4529E6",
           cursor: "pointer",
@@ -152,6 +156,9 @@ export const ProductAuctionCard = ({ product }: any) => {
   const [randomColor, setRandomColor] = useState(
     "randomColorsProfile.random" + randomNumber.toString()
   );
+
+  const navigate = useNavigate();
+
   return (
     <Flex
       role="group"

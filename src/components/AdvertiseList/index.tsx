@@ -10,7 +10,11 @@ export const AdvertiseList = ({ products, type }: any) => {
       <Heading variant="h5" margin={["2rem 0", "2rem 0", "3rem 0"]}>
         Leilão
       </Heading>
-      <Flex gridGap={["0.75rem", "0.75rem", "1.5rem"]} overflow="auto" paddingBottom="1rem">
+      <Flex
+        gridGap={["0.75rem", "0.75rem", "1.5rem"]}
+        overflow="auto"
+        paddingBottom="1rem"
+      >
         {products &&
           products?.map((product: any) => {
             return <ProductAuctionCard key={product.id} product={product} />;
@@ -25,7 +29,11 @@ export const AdvertiseList = ({ products, type }: any) => {
       <Heading variant="h5" margin={["2rem 0", "2rem 0", "3rem 0"]}>
         {type === "bikes" ? "Motos" : "Carros"}
       </Heading>
-      <Flex gridGap={["0.75rem", "0.75rem", "2rem"]} overflow="auto" paddingBottom="1rem" >
+      <Flex
+        gridGap={["0.75rem", "0.75rem", "2rem"]}
+        overflow="auto"
+        paddingBottom="1rem"
+      >
         {products &&
           products?.map((product: any) => {
             return <ProductCard key={product.id} product={product} />;
