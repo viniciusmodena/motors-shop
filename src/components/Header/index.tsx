@@ -17,28 +17,34 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../Providers/users";
 
 export const Header = (): JSX.Element => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  const { auth, setAuth } = useUser();
   const [user, setUser] = useState({
     first_name: "Vinicius",
     last_name: "Modena",
   });
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // const user = JSON.parse(localStorage.getItem("user") || "");
 
   // useEffect(() => {
   //   if (user != "") {
-  //     setAuthenticated(true);
+  //     setAuth(true);
   //   }
   // }, []);
 
   const login = () => {
-    setAuthenticated(true);
+    // navigate("/login")
+    setAuth(true);
   };
   const logout = () => {
-    setAuthenticated(false);
+    setAuth(false);
   };
 
   return (
@@ -46,45 +52,45 @@ export const Header = (): JSX.Element => {
       <nav>
         <Flex
           direction="row"
-          w="100%"
+          width="100%"
           alignItems="center"
           justifyContent="space-between"
-          px="60px"
+          px={{ base: "16px", md: "60px" }}
           height="80px"
           bg="greyScale.grey10"
           borderBottom="2px solid"
           borderColor={"greyScale.grey6"}
         >
           {/* Logo */}
-          <Link variant="logo">
+          <Link variant="logo" onClick={() => navigate("/")}>
             Motors <span style={{ fontSize: "16px" }}>shop</span>
           </Link>
           {/* NavBar widescreen */}
-          <Hide breakpoint="(max-width: 900px)">
-            <Flex gap="44px" h="100%" alignItems="center">
+          <Hide below="lg">
+            <Flex gap="40px" h="100%" alignItems="center">
               {/* NavLinks */}
-              <Flex gap="44px">
-                {authenticated ? (
+              <Flex gap="40px">
+                {auth ? (
                   <>
-                    <Link size="sm" variant={"authenticated"}>
+                    <Link size="sm" variant={"w400"}>
                       Carros
                     </Link>
-                    <Link size="sm" variant={"authenticated"}>
+                    <Link size="sm" variant={"w400"}>
                       Motos
                     </Link>
-                    <Link size="sm" variant={"authenticated"}>
+                    <Link size="sm" variant={"w400"}>
                       Leilão
                     </Link>
                   </>
                 ) : (
                   <>
-                    <Link size="sm" variant={"notAuthenticated"}>
+                    <Link size="sm" variant={"w600"}>
                       Carros
                     </Link>
-                    <Link size="sm" variant={"notAuthenticated"}>
+                    <Link size="sm" variant={"w600"}>
                       Motos
                     </Link>
-                    <Link size="sm" variant={"notAuthenticated"}>
+                    <Link size="sm" variant={"w600"}>
                       Leilão
                     </Link>
                   </>
@@ -97,7 +103,7 @@ export const Header = (): JSX.Element => {
                 bg="greyScale.grey6"
               />
               {/* Authentication session */}
-              {authenticated ? (
+              {auth ? (
                 <Menu isOpen={isOpen} matchWidth={true} gutter={-10}>
                   <MenuButton
                     onMouseEnter={onOpen}
@@ -161,25 +167,11 @@ export const Header = (): JSX.Element => {
                   </MenuList>
                 </Menu>
               ) : (
-                <Flex gap="44px" alignItems="center">
-                  <Button
-                    size={"lg"}
-                    bg={"transparent"}
-                    color="greyScale.grey2"
-                    justifyContent={"flex-start"}
-                    p={"0"}
-                    my={"8px"}
-                    onClick={login}
-                  >
+                <Flex gap="40px" alignItems="center">
+                  <Link variant={"w600"} onClick={login}>
                     Fazer Login
-                  </Button>
-                  <Button
-                    size="lg"
-                    bg="greyScale.whiteFixed"
-                    border="1.5px solid"
-                    borderColor={"greyScale.grey4"}
-                    color={"greyScale.grey0"}
-                  >
+                  </Link>
+                  <Button size="lg" variant={"outline"}>
                     Cadastrar
                   </Button>
                 </Flex>
@@ -187,7 +179,7 @@ export const Header = (): JSX.Element => {
             </Flex>
           </Hide>
           {/* Menu Mobile */}
-          <Show breakpoint="(max-width: 900px)">
+          <Hide above="lg">
             <Menu matchWidth={false} gutter={20}>
               {({ isOpen }) => (
                 <>
@@ -195,12 +187,12 @@ export const Header = (): JSX.Element => {
                     {isOpen ? (
                       <CloseIcon w={"12px"} h={"18px"} fontWeight={"900"} />
                     ) : (
-                      <HamburgerIcon w={"16px"} h={"21px"} fontWeight={"900"} />
+                      <HamburgerIcon w={"16px"} h={"20px"} fontWeight={"900"} />
                     )}
                   </MenuButton>
                   <MenuList
                     minWidth="100vw"
-                    borderTopRadius={"0px"}
+                    borderTopRadius={"0"}
                     p={"32px 16px"}
                   >
                     <MenuItem
@@ -231,7 +223,7 @@ export const Header = (): JSX.Element => {
                       Leilão
                     </MenuItem>
                     <MenuDivider />
-                    {authenticated ? (
+                    {auth ? (
                       <Flex
                         direction={"column"}
                         justifyContent={"center"}
@@ -286,17 +278,11 @@ export const Header = (): JSX.Element => {
                         direction={"column"}
                         justifyContent={"center"}
                         alignItems={"stretch"}
-                        gap={"44px"}
+                        gap={"40px"}
                         padding={"32px 12px"}
                       >
-                        {/* <Link
-                          size="sm"
-                          variant={"notAuthenticated"}
-                          onClick={login}
-                        >
-                          Fazer Login
-                        </Link> */}
                         <Button
+                          as={Link}
                           size={"lg"}
                           bg={"transparent"}
                           color="greyScale.grey2"
@@ -322,25 +308,9 @@ export const Header = (): JSX.Element => {
                 </>
               )}
             </Menu>
-          </Show>
+          </Hide>
         </Flex>
       </nav>
     </header>
-  );
-};
-
-const ProductCard = () => {
-  return (
-    <>
-      <Flex>Card</Flex>
-    </>
-  );
-};
-
-const ProductCardAuction = () => {
-  return (
-    <>
-      <Flex>Card action</Flex>
-    </>
   );
 };

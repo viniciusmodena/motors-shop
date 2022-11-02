@@ -146,7 +146,6 @@ export const ProductCard = ({ product }: any) => {
   );
 };
 
-
 export const ProductAuctionCard = ({ product }: any) => {
   const randomNumber = Math.floor(Math.random() * 12) + 1;
   const [randomColor, setRandomColor] = useState(

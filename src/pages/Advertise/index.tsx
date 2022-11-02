@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Checkbox,
   Container,
   Flex,
   Heading,
@@ -11,23 +12,34 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import UserIconBox from "../../components/UserIconBox";
+import car1 from "../../assets/Cars/car1.png";
+import car2 from "../../assets/Cars/car2.png";
+import car3 from "../../assets/Cars/car3.png";
+import car4 from "../../assets/Cars/car4.png";
+import car5 from "../../assets/Cars/car5.png";
 import car6 from "../../assets/Cars/car6.png";
+
 import { useState } from "react";
 import Gallery from "../../components/Gallery";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useUser } from "../../Providers/users";
 
-const ProductPage = () => {
-  const [auth, setAuth] = useState(true);
+const Advertise = () => {
+  const { auth } = useUser();
+
+  const navigate = useNavigate();
+
   const handleBuy = () => {};
   const handleComment = () => {};
   const redirectLogin = () => {};
 
   const images = [
-    { url: car6 },
-    { url: car6 },
-    { url: car6 },
-    { url: car6 },
-    { url: car6 },
-    { url: car6 },
+    { id: "1", url: car1 },
+    { id: "2", url: car2 },
+    { id: "3", url: car3 },
+    { id: "4", url: car4 },
+    { id: "5", url: car5 },
+    { id: "6", url: car6 },
   ];
 
   const user = {
@@ -71,12 +83,12 @@ const ProductPage = () => {
   return (
     <Container
       maxWidth={"100%"}
-      height={"100vh"}
-      px={"12px"}
+      px={{ base: "16px", lg: "60px" }}
       bg={
         "linear-gradient(180deg, #4529E6 31.25%, #F1F3F5 31.26%, #F1F3F5 100%);"
       }
     >
+      <Outlet />
       <Flex
         direction={{ base: "column", lg: "row" }}
         justifyContent={"center"}
@@ -118,8 +130,8 @@ const ProductPage = () => {
               justifyContent={"center"}
               alignItems={"flex-start"}
               gap={"8px"}
-              py={"1.75rem"}
-              px={"2.75rem"}
+              py={"28px"}
+              px={"40px"}
               bg={"greyScale.grey10"}
               borderRadius={"4px"}
             >
@@ -127,7 +139,7 @@ const ProductPage = () => {
                 direction={"column"}
                 justifyContent={"center"}
                 alignItems={"flex-start"}
-                py={"1rem"}
+                py={"16px"}
                 gap={"41px"}
                 width={"100%"}
                 flex={"none"}
@@ -220,6 +232,27 @@ const ProductPage = () => {
               maxWidth={{ base: "360px", sm: "648px" }}
             >
               <Gallery images={images} user={user} />
+              <Flex
+                direction={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                bg={"greyScale.grey10"}
+                py={"36px"}
+                px={"44px"}
+                gap={"32px"}
+              >
+                <UserIconBox direction={"column"} username={user.name} />
+                <Text variant={"body-1-400"} textAlign={"center"}>
+                  {user.description}
+                </Text>
+                <Button
+                  size={"lg"}
+                  variant={"grey1"}
+                  onClick={() => navigate("/")}
+                >
+                  Ver todos anuncios
+                </Button>
+              </Flex>
             </Flex>
           </Hide>
           {/* Comments Section */}
@@ -296,21 +329,9 @@ const ProductPage = () => {
               width={"100%"}
               alignItems={"flex-end"}
             >
-              {/* <Input
-                  variant="unstyled"
-                  size="lg"
-                  px={"1rem"}
-                  fontSize={"1rem"}
-                  _
-                  placeholder="Digitar comentário"
-                  _placeholder={{
-                    color: "greyScale.grey3",
-                    fontSize: "1rem",
-                  }}
-                /> */}
               <Textarea
-                px={"1rem"}
-                fontSize={"1rem"}
+                px={"16px"}
+                fontSize={"16px"}
                 resize={"none"}
                 border={"none"}
                 _focusVisible={{
@@ -319,7 +340,7 @@ const ProductPage = () => {
                 placeholder="Digitar comentário"
                 _placeholder={{
                   color: "greyScale.grey3",
-                  fontSize: "1rem",
+                  fontSize: "16px",
                 }}
               />
               <Show above="sm">
@@ -359,9 +380,9 @@ const ProductPage = () => {
               alignItems={"center"}
               gap={"8px"}
               wrap={"wrap"}
-              // maxWidth={{ base: "297px", lg: "441px" }}
             >
               <Button
+                id="check1"
                 bg={"greyScale.grey7"}
                 borderRadius={"24px"}
                 px={"12px"}
@@ -408,6 +429,27 @@ const ProductPage = () => {
         <Show above="lg">
           <Flex direction={"column"} gap={"34px"} maxWidth={"441px"}>
             <Gallery images={images} user={user} />
+            <Flex
+              direction={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              bg={"greyScale.grey10"}
+              py={"36px"}
+              px={"44px"}
+              gap={"32px"}
+            >
+              <UserIconBox direction={"column"} username={user.name} />
+              <Text variant={"body-1-400"} textAlign={"center"}>
+                {user.description}
+              </Text>
+              <Button
+                size={"lg"}
+                variant={"grey1"}
+                onClick={() => navigate("/")}
+              >
+                Ver todos anuncios
+              </Button>
+            </Flex>
           </Flex>
         </Show>
       </Flex>
@@ -415,4 +457,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default Advertise;

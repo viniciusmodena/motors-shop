@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Header } from "./components/Header";
-import ProductPage from "./Pages/ProdutPage";
+import Advertise from "./pages/Advertise";
+import Routes from "./routes";
 
 function App() {
   return (
     <>
       <Header />
-      <ProductPage />
+      <Routes />
     </>
   );
 }

@@ -6,11 +6,17 @@ import {
   Heading,
   Image,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
+import ModalGallery from "../ModalGallery";
 import UserIconBox from "../UserIconBox";
 
-const Gallery = ({ images, user }: any): JSX.Element => {
-  const redirectProfile = () => {};
+const Gallery = ({ images }: any): JSX.Element => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Flex
@@ -39,6 +45,8 @@ const Gallery = ({ images, user }: any): JSX.Element => {
           {images.map((image: any, index: number) => (
             <GridItem
               key={index}
+              onClick={() => navigate(`/advertise/gallery/${image.id}`)}
+              cursor={"pointer"}
               display={"flex"}
               bg={"greyScale.grey7"}
               justifyContent={"center"}
@@ -58,7 +66,7 @@ const Gallery = ({ images, user }: any): JSX.Element => {
             >
               <Image
                 src={image.url}
-                alt="car6"
+                alt={`Vehicle image ${index + 1}`}
                 flex={"none"}
                 flexGrow={0}
                 flexShrink={1}
@@ -66,23 +74,7 @@ const Gallery = ({ images, user }: any): JSX.Element => {
             </GridItem>
           ))}
         </Grid>
-      </Flex>
-      <Flex
-        direction={"column"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        bg={"greyScale.grey10"}
-        py={"36px"}
-        px={"44px"}
-        gap={"32px"}
-      >
-        <UserIconBox direction={"column"} username={user.name} />
-        <Text variant={"body-1-400"} textAlign={"center"}>
-          {user.description}
-        </Text>
-        <Button size={"lg"} variant={"grey1"} onClick={redirectProfile}>
-          Ver todos anuncios
-        </Button>
+        {/* <ModalGallery images={galleryImage} isOpen={isOpen} onClose={onClose} /> */}
       </Flex>
     </>
   );

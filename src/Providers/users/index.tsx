@@ -21,6 +21,8 @@ export interface UserType {
 interface UserProviderData {
   user: UserType | null;
   setUser: (user: UserType) => void;
+  auth: boolean;
+  setAuth: (bool: boolean) => void;
   userRegister: (data: RegisterUserType) => void;
   userLogin: (credentials: CredentialsType) => void;
   userAccountDetail: () => void;
@@ -59,6 +61,7 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserType>({} as UserType);
+  const [auth, setAuth] = useState<boolean>(false);
 
   const userRegister = (data: RegisterUserType) => {
     api
@@ -131,6 +134,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       value={{
         user,
         setUser,
+        auth,
+        setAuth,
         userRegister,
         userLogin,
         userAccountDetail,

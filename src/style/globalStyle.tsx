@@ -15,7 +15,6 @@ export const theme = extendTheme({
         bg: "greyScale.grey8",
         color: "greyScale.grey1",
         width: "100vw",
-        height: "100vh",
         overflowX: "hidden",
       },
       a: {
@@ -156,22 +155,22 @@ export const theme = extendTheme({
         "body-1-400": {
           fontWeight: "400",
           fontSize: "sm",
-          lineHeight: "1.75rem",
+          lineHeight: "28px",
         },
         "body-1-600": {
           fontWeight: "400",
           fontSize: "xs",
-          lineHeight: "1.5rem",
+          lineHeight: "24px",
         },
         "body-2-400": {
           fontWeight: "400",
           fontSize: "xs",
-          lineHeight: "1.5rem",
+          lineHeight: "24px",
         },
         "body-2-500": {
           fontWeight: "500",
           fontSize: "xs",
-          lineHeight: "1.5rem",
+          lineHeight: "24px",
         },
         "button-big-text": {
           fontWeight: "600",
@@ -191,7 +190,7 @@ export const theme = extendTheme({
         "input-label": {
           fontWeight: "500",
           fontSize: "xs",
-          lineHeight: "1rem",
+          lineHeight: "16px",
         },
       },
     },
@@ -256,6 +255,17 @@ export const theme = extendTheme({
             borderColor: "greyScale.grey5",
           },
         },
+        outline: {
+          bg: "none",
+          border: "1.5px solid",
+          borderColor: "greyScale.grey0",
+          color: "greyScale.grey0",
+          _hover: {
+            bg: "greyScale.grey1",
+            color: "greyScale.grey10",
+            borderColor: "greyScale.grey1",
+          },
+        },
         disable: {
           bg: "greyScale.grey5",
           border: "1.5px solid",
@@ -287,10 +297,10 @@ export const theme = extendTheme({
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         },
-        authenticated: {
+        w400: {
           fontWeight: "400",
         },
-        notAuthenticated: {
+        w600: {
           fontWeight: "600",
         },
       },
