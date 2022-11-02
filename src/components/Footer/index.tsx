@@ -18,7 +18,9 @@ export const Footer = () => {
         flexDirection={["column", "column", "row"]}
         gridGap="30px"
       >
-        <Image src="src\assets\LogoBW.svg" alt="logo" w="150px" />
+        <Flex bgColor="greyScale.grey0" color="greyScale.whiteFixed">
+          <Text as="span" fontSize="lg" fontWeight="600">Motors <Text as="span" fontSize="sm">shop</Text></Text> 
+        </Flex>
 
         <Text color="greyScale.whiteFixed" alignSelf="center">
           &copy; 2022 - Todos os direitos reservados.
@@ -30,6 +32,7 @@ export const Footer = () => {
           h="50px"
           bgColor="greyScale.grey1"
           color="greyScale.whiteFixed"
+          href="#top"
           _hover={{ bgColor: "greyScale.grey2" }}
         >
           <ChevronUpIcon />
