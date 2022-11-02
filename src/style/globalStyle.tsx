@@ -6,7 +6,7 @@ export const theme = extendTheme({
       body: {
         bg: "greyScale.grey8",
         color: "greyScale.grey1",
-        width: "100vw",
+        // width: "100vw",
       },
       a: {
         textDecoration: "none",
