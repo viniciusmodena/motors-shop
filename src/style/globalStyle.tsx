@@ -1,12 +1,22 @@
 import { extendTheme } from "@chakra-ui/react";
 
+const breakpoints = {
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
+};
+
 export const theme = extendTheme({
   styles: {
     global: {
       body: {
         bg: "greyScale.grey8",
         color: "greyScale.grey1",
-        // width: "100vw",
+        width: "100vw",
+        overflowX: "hidden",
+
       },
       a: {
         textDecoration: "none",
@@ -34,6 +44,7 @@ export const theme = extendTheme({
     xl: "1.75rem",
     "2xl": "2rem",
     "3xl": "2.25rem",
+    "4xl": "2.75rem",
   },
 
   colors: {
@@ -83,66 +94,104 @@ export const theme = extendTheme({
 
   components: {
     Heading: {
+      baseStyle: {
+        color: "greyScale.grey1",
+      },
       variants: {
         h1: {
-          fontSize: "44px",
+          fontSize: "4xl",
           fontWeight: "700",
-          color: "greyScale.grey1",
         },
         h2: {
-          fontSize: "36px",
+          fontSize: "3xl",
           fontWeight: "600",
-          color: "greyScale.grey1",
         },
         h3: {
-          fontSize: "32px",
+          fontSize: "2xl",
           fontWeight: "600",
-          color: "greyScale.grey1",
         },
         h3_500: {
-          fontSize: "32px",
+          fontSize: "2xl",
           fontWeight: "500",
-          color: "greyScale.grey1",
         },
         h4: {
-          fontSize: "28px",
+          fontSize: "xl",
           fontWeight: "600",
-          color: "greyScale.grey1",
         },
         h4_500: {
-          fontSize: "28px",
+          fontSize: "xl",
           fontWeight: "500",
-          color: "greyScale.grey1",
         },
         h5: {
-          fontSize: "24px",
+          fontSize: "lg",
           fontWeight: "600",
-          color: "greyScale.grey1",
         },
         h5_500: {
-          fontSize: "24px",
+          fontSize: "lg",
           fontWeight: "500",
-          color: "greyScale.grey1",
         },
         h6: {
-          fontSize: "20px",
+          fontSize: "md",
           fontWeight: "600",
-          color: "greyScale.grey1",
         },
         h6_500: {
-          fontSize: "20px",
+          fontSize: "md",
           fontWeight: "500",
-          color: "greyScale.grey1",
         },
         h7: {
-          fontSize: "16px",
+          fontSize: "sm",
           fontWeight: "600",
-          color: "greyScale.grey1",
         },
         h7_500: {
-          fontSize: "16px",
+          fontSize: "sm",
           fontWeight: "500",
-          color: "greyScale.grey1",
+        },
+      },
+    },
+    Text: {
+      baseStyle: {
+        color: "greyScale.grey2",
+      },
+      variants: {
+        "body-1-400": {
+          fontWeight: "400",
+          fontSize: "sm",
+          lineHeight: "28px",
+        },
+        "body-1-600": {
+          fontWeight: "400",
+          fontSize: "xs",
+          lineHeight: "24px",
+        },
+        "body-2-400": {
+          fontWeight: "400",
+          fontSize: "xs",
+          lineHeight: "24px",
+        },
+        "body-2-500": {
+          fontWeight: "500",
+          fontSize: "xs",
+          lineHeight: "24px",
+        },
+        "button-big-text": {
+          fontWeight: "600",
+          fontSize: "sm",
+          lineHeight: "0",
+        },
+        "button-medium-text": {
+          fontWeight: "600",
+          fontSize: "xs",
+          lineHeight: "0",
+        },
+        "input-placeholder": {
+          fontWeight: "400",
+          fontSize: "xs",
+          lineHeight: "0",
+        },
+        "input-label": {
+          fontWeight: "500",
+          fontSize: "xs",
+          lineHeight: "16px",
         },
       },
     },
@@ -176,6 +225,55 @@ export const theme = extendTheme({
           px: "28px",
         },
       },
+      variants: {
+        grey1: {
+          bg: "greyScale.grey0",
+          border: "1.5px solid",
+          borderColor: "greyScale.grey0",
+          color: "greyScale.whiteFixed",
+          _hover: {
+            bg: "greyScale.grey1",
+            borderColor: "greyScale.grey1",
+          },
+        },
+        brand1: {
+          bg: "brand.brand1",
+          border: "1.5px solid",
+          borderColor: "brand.brand1",
+          color: "greyScale.whiteFixed",
+          _hover: {
+            bg: "brand.brand2",
+            borderColor: "brand.brand2",
+          },
+        },
+        negative: {
+          bg: "greyScale.grey6",
+          border: "1.6px solid",
+          borderColor: "greyScale.grey6",
+          color: "greyScale.grey2",
+          _hover: {
+            bg: "greyScale.grey5",
+            borderColor: "greyScale.grey5",
+          },
+        },
+        outline: {
+          bg: "none",
+          border: "1.5px solid",
+          borderColor: "greyScale.grey0",
+          color: "greyScale.grey0",
+          _hover: {
+            bg: "greyScale.grey1",
+            color: "greyScale.grey10",
+            borderColor: "greyScale.grey1",
+          },
+        },
+        disable: {
+          bg: "greyScale.grey5",
+          border: "1.5px solid",
+          borderColor: "greyScale.grey6",
+          color: "greyScale.whiteFixed",
+        },
+      },
     },
     Link: {
       baseStyle: {
@@ -197,13 +295,13 @@ export const theme = extendTheme({
             "linear-gradient(90deg, #0B0D0D -1.61%, #4529E6 100.99%)",
           backgroundRepeat: "repeat",
           backgroudSize: "100%",
-          "-webkit-background-clip": "text",
-          "-webkit-text-fill-color": "transparent",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
         },
-        authenticated: {
+        w400: {
           fontWeight: "400",
         },
-        notAuthenticated: {
+        w600: {
           fontWeight: "600",
         },
       },
