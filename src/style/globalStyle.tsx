@@ -16,7 +16,6 @@ export const theme = extendTheme({
         color: "greyScale.grey1",
         width: "100vw",
         overflowX: "hidden",
-
       },
       a: {
         textDecoration: "none",
@@ -304,6 +303,20 @@ export const theme = extendTheme({
         w600: {
           fontWeight: "600",
         },
+      },
+    },
+    FormLabel: {
+      baseStyle: {
+        fontSize: "xs",
+        fontWeight: "500",
+        color: "greyScale.grey0",
+        marginTop: "1.25rem"
+      },
+    },
+    Input: {
+      baseStyle: {
+        fontSize: "xs",
+        color: "greyScale.grey0"
       },
     },
   },

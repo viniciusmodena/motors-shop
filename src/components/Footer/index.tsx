@@ -19,10 +19,10 @@ export const Footer = () => {
         gridGap="30px"
       >
         <Flex bgColor="greyScale.grey0" color="greyScale.whiteFixed">
-          <Text as="span" fontSize="lg" fontWeight="600">Motors <Text as="span" fontSize="sm">shop</Text></Text> 
+          <Text as="span" fontSize="lg" fontWeight="600" color="greyScale.whiteFixed">Motors <Text as="span" fontSize="sm" color="greyScale.whiteFixed">shop</Text></Text> 
         </Flex>
 
-        <Text color="greyScale.whiteFixed" alignSelf="center">
+        <Text color="greyScale.whiteFixed" alignSelf="center" align="center">
           &copy; 2022 - Todos os direitos reservados.
         </Text>
 

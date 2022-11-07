@@ -174,3 +174,13 @@ export const getUser = (id: any) => {
   console.log(user);
   return user;
 };
+
+export const authUser = {
+  id: "1",
+  name: "User3 User",
+  description:
+    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae dignissimos commodi vitae accusamus velit a quisquam tenetur fugit, et blanditiis assumenda minus accusantium? , et blanditiis assumenda minus accusantium?",
+  is_seller: true,
+  image:
+    "https://i.pinimg.com/originals/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg",
+}
