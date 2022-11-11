@@ -16,14 +16,16 @@ import {
   Input,
   Textarea,
   HStack,
-  Radio,
-  RadioGroup,
   Box,
   useRadio,
   useRadioGroup,
+  Stack,
+  Radio,
+  RadioGroup,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -31,25 +33,27 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
   const [isAuction, setIsAuction] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
+  const [isSales, setIsSales] = useState(true);
+  const [isCar, setIsCar] = useState(true);
 
-  const options = ["Venda", "Leilao"];
-  // const vehicle_options = ["Carro", "Moto"];
+  const [gallery, setGallery] = useState([{}]);
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    defaultValue: "venda",
-    onChange: console.log,
-  });
-
-  const group = getRootProps();
-
-
-  const input_list = [{ type: "text", id: 1, value: "" }];
+  const input_list = [{ type: "text", id: 0, value: "" }];
   const [fields, setFields] = useState(input_list);
+
+  type AdvertiseRegister = {
+    title: string;
+    year: number;
+    km: number;
+    price: number;
+    description: string;
+    cover_img: string;
+  };
 
   const addField = () => {
     setFields((s: any) => {
       const lastId = s[s.length - 1].id;
-      return [...s, { type: "text", value: "" }];
+      return [...s, { type: "text", value: "", id: lastId }];
     });
   };
 
@@ -61,33 +65,42 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
       const newArr = s.slice();
       newArr[index].value = e.target.value;
       newArr[index].id = e.target.id;
-      console.log(newArr);
+
+      const gal = newArr.map((item) => {
+        return item.value;
+      });
+      setGallery(gal);
       return newArr;
     });
   };
 
-
   const schema = yup.object().shape({
-    type: yup.string(),
-    title: yup.string().required(),
-    year: yup.number().required(),
-    km: yup.number().required(),
-    price: yup.number().required(),
-    description: yup.string().required(),
-    vehicle_type: yup.string(),
-    cover_img: yup.string().required(),
+    title: yup.string().required("Campo obrigatório"),
+    year: yup.number().required("Campo obrigatório"),
+    km: yup.number().required("Campo obrigatório"),
+    price: yup.number().required("Campo obrigatório"),
+    description: yup.string().required("Campo obrigatório"),
+    cover_img: yup.string().required("Campo obrigatório"),
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema), mode: "onBlur" });
+  } = useForm<AdvertiseRegister>({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+  });
 
   const onSubmit = (values: any) => {
-    console.log(values);
+    const obj = {
+      ...values,
+      type: isSales ? "sales" : "auction",
+      vehicle_type: isCar ? "car" : "bike",
+      gallery: gallery,
+    };
+    console.log(obj);
   };
-
 
   return (
     <Modal
@@ -107,16 +120,39 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
             {/* chamando radios */}
             <FormControl>
               <FormLabel>Tipo de anúncio</FormLabel>
-
-              <HStack {...group} {...register("type")}>
-                {options.map((value) => {
-                  const radio = getRadioProps({ value });
-                  return (
-                    <RadioCard key={value} {...radio}>
-                      {value}
-                    </RadioCard>
-                  );
-                })}
+              <HStack>
+                <Button
+                  onFocus={() => setIsSales(false)}
+                  w="100%"
+                  size="lg"
+                  bg={"greyScale.grey10"}
+                  border="1.5px solid #ADB5BD"
+                  color="#0B0D0D"
+                  fontWeight="600"
+                  _focus={{
+                    bg: "#4529E6",
+                    color: "#ffffff",
+                    borderColor: "#4529E6",
+                  }}
+                >
+                  Venda
+                </Button>
+                <Button
+                  onFocus={() => setIsSales(true)}
+                  w="100%"
+                  size="lg"
+                  bg={"greyScale.grey10"}
+                  border="1.5px solid #ADB5BD"
+                  color="#0B0D0D"
+                  fontWeight="600"
+                  _focus={{
+                    bg: "#4529E6",
+                    color: "#ffffff",
+                    borderColor: "#4529E6",
+                  }}
+                >
+                  Leilão
+                </Button>
               </HStack>
             </FormControl>
 
@@ -127,27 +163,36 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
             >
               Informações do veículo
             </Text>
-            <FormControl isRequired>
+            <FormControl isRequired isInvalid={!!errors?.title?.message}>
               <FormLabel>Título</FormLabel>
               <Input size="lg" fontSize="sm" {...register("title")} />
+              <FormErrorMessage fontSize={"12px"}>
+                {errors?.title?.message}
+              </FormErrorMessage>
             </FormControl>
 
             <Flex columnGap={"10px"}>
               <Flex flexDirection={"column"}>
-                <FormControl isRequired>
+                <FormControl isRequired isInvalid={!!errors?.year?.message}>
                   <FormLabel>Ano</FormLabel>
                   <Input size="lg" fontSize="sm" {...register("year")} />
+                  <FormErrorMessage fontSize={"12px"}>
+                    {errors?.year?.message}
+                  </FormErrorMessage>
                 </FormControl>
               </Flex>
 
               <Flex flexDirection={"column"}>
-                <FormControl isRequired>
+                <FormControl isRequired isInvalid={!!errors?.km?.message}>
                   <FormLabel>Quilometragem</FormLabel>
                   <Input size="lg" fontSize="sm" {...register("km")} />
+                  <FormErrorMessage fontSize={"12px"}>
+                    {errors?.km?.message}
+                  </FormErrorMessage>
                 </FormControl>
               </Flex>
 
-              <FormControl isRequired>
+              <FormControl isRequired isInvalid={!!errors?.price?.message}>
                 <Flex flexDirection={"column"}>
                   {!isAuction ? (
                     <FormLabel>Preço</FormLabel>
@@ -155,39 +200,66 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
                     <FormLabel>Lance Inicial</FormLabel>
                   )}
                   <Input size="lg" fontSize="sm" {...register("price")} />
+                  <FormErrorMessage fontSize={"12px"}>
+                    {errors?.price?.message}
+                  </FormErrorMessage>
                 </Flex>
               </FormControl>
             </Flex>
 
-            <FormControl isRequired>
+            <FormControl isRequired isInvalid={!!errors?.description?.message}>
               <FormLabel>Descrição</FormLabel>
               <Textarea fontSize="sm" {...register("description")} />
+              <FormErrorMessage fontSize={"12px"}>
+                {errors?.description?.message}
+              </FormErrorMessage>
             </FormControl>
 
-            {/* <FormControl {...register("vehicle_type")}>
+            <FormControl>
               <FormLabel>Tipo de veículo</FormLabel>
-
-              <HStack {...group}>
-                {vehicle_options.map((value) => {
-                  const radio = getRadioProps({ value });
-                  return (
-                    <RadioCard key={value} {...radio}>
-                      {value}
-                    </RadioCard>
-                  );
-                })}
+              <HStack>
+                <Button
+                  onFocus={() => setIsCar(true)}
+                  w="100%"
+                  size="lg"
+                  bg={"greyScale.grey10"}
+                  border="1.5px solid #ADB5BD"
+                  color="#0B0D0D"
+                  fontWeight="600"
+                  _focus={{
+                    bg: "#4529E6",
+                    color: "#ffffff",
+                    borderColor: "#4529E6",
+                  }}
+                >
+                  Carro
+                </Button>
+                <Button
+                  onFocus={() => setIsCar(false)}
+                  w="100%"
+                  size="lg"
+                  bg={"greyScale.grey10"}
+                  border="1.5px solid #ADB5BD"
+                  color="#0B0D0D"
+                  fontWeight="600"
+                  _focus={{
+                    bg: "#4529E6",
+                    color: "#ffffff",
+                    borderColor: "#4529E6",
+                  }}
+                >
+                  Moto
+                </Button>
               </HStack>
-            </FormControl> */}
+            </FormControl>
 
-            <FormControl isRequired>
+            <FormControl isRequired isInvalid={!!errors?.cover_img?.message}>
               <FormLabel>Imagem da capa</FormLabel>
               <Input size="lg" fontSize="sm" {...register("cover_img")} />
+              <FormErrorMessage fontSize={"12px"}>
+                {errors?.cover_img?.message}
+              </FormErrorMessage>
             </FormControl>
-
-            {/* <FormControl isRequired>
-              <FormLabel>1° Imagem da galeria</FormLabel>
-              <Input size="lg" fontSize="sm" {...register("gallery")} />
-            </FormControl> */}
 
             <FormControl isRequired>
               {fields.map((item, index) => {
@@ -225,7 +297,6 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
               </Button>
               <Button
                 onClick={handleSubmit(onSubmit)}
-                disabled={disabled}
                 size="lg"
                 fontSize="xs"
                 bg="brand.brand1"
@@ -234,6 +305,15 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
                   bg: "#B0A6F0",
                 }}
                 _hover={{}}
+                disabled={
+                  !!errors.title ||
+                  !!errors.description ||
+                  !!errors.price ||
+                  !!errors.year ||
+                  !!errors.km ||
+                  !!errors.price ||
+                  !!errors.cover_img
+                }
               >
                 Criar anúncio
               </Button>
@@ -247,15 +327,12 @@ export const AdvertiseModal = ({ isOpen, onOpen, onClose }: any) => {
 
 const RadioCard = (props: any) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);
-
   const input = getInputProps();
-  // console.log(input);
   const checkbox = getCheckboxProps();
-  
 
   return (
     <Box as="label" w="100%">
-      <Input {...input} />
+      <input {...input} />
       <Box
         {...checkbox}
         cursor="pointer"
